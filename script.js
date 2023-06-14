@@ -135,28 +135,91 @@ btnsSlide[2].addEventListener("click", () => {
     slidesItem[1].classList.add("prevSlide");
 })
 
-const sections = document.querySelectorAll(".section");
+const sections = document.querySelectorAll(".section"),
+      linkSection = document.querySelectorAll(".linkSection");
 
 console.log(sections)
 
 let currentSectionIndex = 0;
 
 function scrollToSection(index){
-
     sections[index].scrollIntoView({ behavior: 'smooth'});
-
 }
 
 function handleScroll(event) {
-   if(event.deltaY > 0){
+   if(event.deltaY > 30 || event.deltaX > 30){
     currentSectionIndex = currentSectionIndex < sections.length - 1 ? currentSectionIndex + 1 : currentSectionIndex;
-    console.log(currentSectionIndex)
     scrollToSection(currentSectionIndex)
+    removeScrollListeners();
+    setTimeout(() => addScrollListeners(), 500);
    }
-   else if(event.deltaY < 0){
+   else if(event.deltaY < -30 || event.deltaX < -30){
     currentSectionIndex = currentSectionIndex > 0 ? currentSectionIndex - 1 : 0;
     scrollToSection(currentSectionIndex)
+    removeScrollListeners();
+    setTimeout(() => addScrollListeners(), 500);
    }
 }
 
+function handleTouchStart(event) {
+    this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+    event.preventDefault();
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+    const deltaX = touchX - this.touchStartX;
+    const deltaY = touchY - this.touchStartY;
+
+    if (Math.abs(deltaX) > 30 || Math.abs(deltaY) > 30) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 30) {
+                currentSectionIndex = currentSectionIndex < sections.length - 1 ? currentSectionIndex + 1 : currentSectionIndex;
+            } else if (deltaX < -30) {
+                currentSectionIndex = currentSectionIndex > 0 ? currentSectionIndex - 1 : 0;
+            }
+        } else {
+            if (deltaY > 30) {
+                currentSectionIndex = currentSectionIndex < sections.length - 1 ? currentSectionIndex + 1 : currentSectionIndex;
+            } else if (deltaY < -30) {
+                currentSectionIndex = currentSectionIndex > 0 ? currentSectionIndex - 1 : 0;
+            }
+        }
+
+        scrollToSection(currentSectionIndex);
+        removeTouchListeners();
+        setTimeout(() => addTouchListeners(), 500);
+    }
+}
+
+function addScrollListeners() {
+    document.addEventListener('wheel', handleScroll);
+}
+
+function removeScrollListeners() {
+    document.removeEventListener('wheel', handleScroll);
+}
+
+function addTouchListeners() {
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchmove', handleTouchMove);
+}
+
+function removeTouchListeners() {
+    document.removeEventListener('touchstart', handleTouchStart);
+    document.removeEventListener('touchmove', handleTouchMove);
+}
+
 document.addEventListener('wheel', handleScroll);
+document.addEventListener('touchstart', handleTouchStart);
+document.addEventListener('touchmove', handleTouchMove);
+
+linkSection.forEach((item, i) => {
+    item.addEventListener("click", (event) => {
+        scrollToSection(i + 1)
+    })
+})
+
+

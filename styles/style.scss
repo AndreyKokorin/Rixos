@@ -14,11 +14,11 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
 }
-/* .body::-webkit-scrollbar {
+.body::-webkit-scrollbar {
     width: 0;
-  } */
+  }
 .header{
     position: fixed;
     top: 0;
@@ -143,7 +143,7 @@ body{
     background-size: cover;
     position: relative;
     &__welcome{
-        width: 45%;
+        width: 40%;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -156,11 +156,18 @@ body{
         animation: animeWelcome 1s linear;
         @media (max-width: 980px) {
             height: 230px;
-            width: 375px;
         }
         @media (max-width: 400px) {
             height: 230px;
-            width: 100%;
+        }
+        @media (max-width: 780px) {
+            width: 100% !important;
+        }
+        @media (max-width: 980px) {
+            width: 45%;
+        }
+        @media (max-width: 780px) {
+           height: auto;
         }
         &-title{
             font-family: "Merriweather";
@@ -218,7 +225,7 @@ body{
 
 .review{
    width: 100%;
-   height: 1080px;
+   height: 100vh !important;
    display: flex;
    position: relative;
    box-sizing: border-box;
@@ -237,6 +244,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100%;
+    padding-top: 45px;
     background: #334A5E;
     @media (max-width: 780px) {
         width: 100% !important;
@@ -251,7 +259,7 @@ body{
         font-family: 'Merriweather';
         font-style: normal;
         font-weight: 400;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 45px;
         letter-spacing: 0.05em;
         color: #FFFFFF;
@@ -273,13 +281,13 @@ body{
         font-family: 'Merriweather';
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 13.5px;
         line-height: 25px;
         color: #FFFFFF;
         max-width: 530px;
         justify-content: center;
         width: 78%;
-        padding-top: 40px;
+        padding-top: 10px;
         @media (max-width: 1200px) {
             font-size: 14px;
         }
@@ -298,13 +306,13 @@ body{
         font-family: 'Merriweather';
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 13px;
         line-height: 25px;
         color: #FFFFFF;
         max-width: 530px;
         width: 78%;
         height: 595px;
-        padding-top: 40px;
+        padding-top: 20px;
         @media (max-width: 1200px) {
             font-size: 14px;
         }
@@ -320,7 +328,7 @@ body{
         }
     }
     &-charect{
-        padding-top: 50px;
+        padding-top: 25px;
     }
     &-list{
         li{
@@ -421,7 +429,8 @@ body{
             left: 0;;*/
             z-index: 10
         } 
-        height: 100%;
+        height: 80%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -580,6 +589,7 @@ body{
     }
     &-descr{
         display: flex;
+        width: 100%;
         align-items: center;
         padding-top: 40px;
         @media (max-width: 780px) {
@@ -687,7 +697,7 @@ body{
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: center;
+    justify-content: end;
     box-sizing: border-box;
     padding-left: 100px;
     width: 60%;
@@ -747,7 +757,8 @@ body{
         }
     }
     &-form{
-        padding-top: 150px;
+        padding-top: 40px;
+        padding-bottom: 30px;
         @media (max-width:980px) {
             padding-top: 60px;
         }
@@ -1011,6 +1022,7 @@ body{
 
 .review__slider{
     padding-left: 100px;
+    padding-top: 90px;
     @media (max-width: 780px ) {
         height: 1500px;
      }
@@ -1113,7 +1125,8 @@ body{
     &-btns{
         display: flex;
         align-items: center;
-        padding-top: 70px;
+        padding-top: 40px;
+        padding-bottom: 20px;
         padding-left: 155px;
         box-sizing: border-box;
         @media (max-width: 980px ) {
@@ -1166,4 +1179,15 @@ body{
 }
 .dnone{
     opacity: 0;
+}
+
+.space{
+    margin: 10px 0 10px 0;
+}
+
+.photo{
+    img{
+        max-width: 320px;
+        height: 524px;
+    }
 }
